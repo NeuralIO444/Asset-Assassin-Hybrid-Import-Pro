@@ -1,0 +1,6 @@
+# Adobe ExtendScript / After Effects
+*.log
+*.jsxbin
+
+# Mac OS
+.DS_Store

@@ -1,0 +1,44 @@
+// lib/settings.jsxinc
+// Persistent Settings Module (via app.settings)
+// Asset Assassin: Hybrid Import Pro v3.2
+
+var AppPrefs = (function () {
+    function save(key, value) {
+        if (app.settings.haveSetting(Config.SETTINGS_SECTION, key)) {
+            app.settings.saveSetting(Config.SETTINGS_SECTION, key, value.toString());
+        } else {
+            app.settings.saveSetting(Config.SETTINGS_SECTION, key, value.toString());
+        }
+    }
+
+    function load(key, defaultValue) {
+        if (app.settings.haveSetting(Config.SETTINGS_SECTION, key)) {
+            var val = app.settings.getSetting(Config.SETTINGS_SECTION, key);
+            return val === "true"; // Simple boolean conversion
+        }
+        return defaultValue;
+    }
+
+    function loadAll() {
+        var currentSettings = {};
+        for (var key in Config.DEFAULTS) {
+            if (Config.DEFAULTS.hasOwnProperty(key)) {
+                currentSettings[key] = load(key, Config.DEFAULTS[key]);
+            }
+        }
+        return currentSettings;
+    }
+
+    function saveAll(settingsObj) {
+        for (var key in settingsObj) {
+            if (settingsObj.hasOwnProperty(key)) {
+                save(key, settingsObj[key]);
+            }
+        }
+    }
+
+    return {
+        loadAll: loadAll,
+        saveAll: saveAll
+    };
+})();

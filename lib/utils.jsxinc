@@ -1,0 +1,99 @@
+// lib/utils.jsxinc
+// Shared Utility Functions
+// Asset Assassin: Hybrid Import Pro v3.1
+
+var Utils = (function() {
+
+    // --- Pad End for Terminal alignment ---
+    function padEnd(str, targetLength, padString) {
+        str = String(str);
+        targetLength = targetLength >> 0;
+        padString = String((typeof padString !== 'undefined' ? padString : ' '));
+        if (str.length >= targetLength) {
+            return str;
+        } else {
+            targetLength = targetLength - str.length;
+            if (targetLength > padString.length) {
+                padString += new Array(Math.ceil(targetLength / padString.length) + 1).join(padString);
+            }
+            return str + padString.slice(0, targetLength);
+        }
+    }
+
+    // --- Pad Start for Terminal alignment ---
+    function padStart(str, targetLength, padString) {
+        str = String(str);
+        targetLength = targetLength >> 0; 
+        padString = String((typeof padString !== 'undefined' ? padString : ' '));
+        if (str.length >= targetLength) {
+            return str;
+        } else {
+            targetLength = targetLength - str.length;
+            if (targetLength > padString.length) {
+                padString += new Array(Math.ceil(targetLength / padString.length) + 1).join(padString);
+            }
+            return padString.slice(0, targetLength) + str;
+        }
+    }
+
+    // --- Path Hardener ---
+    // Resolves .fsName and handles cross-platform slash issues (Mac/Win) silently.
+    function normalizePath(folderObj) {
+        if (!folderObj || !folderObj.fsName) return "";
+        var path = folderObj.fsName;
+        // Convert backward slashes to forward slashes for cross-platform safety
+        path = path.replace(/\\/g, '/');
+        // Remove trailing slash if present
+        if (path.charAt(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
+    }
+
+    // --- AE Project Folder Creation Wrapper ---
+    // Recursively ensures an AE project folder path exists (e.g. "Assets/3d ren")
+    function ensureProjectFolderExists(pathStr, rootFolder) {
+        var parts = pathStr.split('/');
+        var currentFolder = rootFolder || app.project.rootFolder;
+        
+        for (var i = 0; i < parts.length; i++) {
+            var partName = parts[i];
+            if (!partName) continue;
+            
+            var found = false;
+            for (var j = 1; j <= currentFolder.numItems; j++) {
+                var item = currentFolder.item(j);
+                if (item instanceof FolderItem && item.name === partName) {
+                    currentFolder = item;
+                    found = true;
+                    break;
+                }
+            }
+            
+            if (!found) {
+                currentFolder = currentFolder.items.addFolder(partName);
+            }
+        }
+        return currentFolder;
+    }
+
+    // --- Try/Catch Wrapper ---
+    function safeExecute(fn, errorContext, loggerFunc) {
+        try {
+            return fn();
+        } catch (e) {
+            if (loggerFunc) {
+                loggerFunc("ERROR [" + errorContext + "]: " + e.toString());
+            }
+            return null;
+        }
+    }
+
+    return {
+        padEnd: padEnd,
+        padStart: padStart,
+        normalizePath: normalizePath,
+        ensureProjectFolderExists: ensureProjectFolderExists,
+        safeExecute: safeExecute
+    };
+})();

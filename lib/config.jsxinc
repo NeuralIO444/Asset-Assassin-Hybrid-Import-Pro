@@ -1,0 +1,36 @@
+// lib/config.jsxinc
+// Centralized Configuration and Settings Defaults
+// Asset Assassin: Hybrid Import Pro v3.2
+
+var Config = {
+    SCRIPT_NAME: "Asset Assassin: Hybrid",
+    VERSION: "3.2",
+    BANNER_FILENAME: "asset_assassin_banner.png",
+    SETTINGS_SECTION: "AssetAssassin_Hybrid_v3",
+
+    // File Type Definitions
+    FILE_TYPES: {
+        ren: { label: "3d ren", exts: ['exr', 'dpx', 'hdr', 'rla', 'c4d'], target: "Assets/3d ren" },
+        footage: { label: "footage", exts: ['mov', 'mp4', 'avi', 'mxf', 'r3d', 'mpg'], target: "Assets/footage" },
+        ill: { label: "ill", exts: ['ai', 'eps', 'svg'], target: "Assets/ill" },
+        images: { label: "images", exts: ['jpg', 'jpeg', 'png', 'tif', 'tiff', 'bmp', 'gif'], target: "Assets/images" },
+        psd: { label: "psd", exts: ['psd', 'psb'], target: "Assets/psd" },
+        audio: { label: "Audio", exts: ['wav', 'mp3', 'aac', 'aif', 'aiff'], target: "Assets/Audio" },
+        solids: { label: "Solids", exts: [], target: "Solids" } // Special case handled by source type
+    },
+
+    // Default Settings for Checkboxes
+    DEFAULTS: {
+        ren: true,
+        footage: true,
+        ill: true,
+        images: true,
+        psd: true,
+        audio: true,
+        solids: true,
+        comps: true,
+        prune: true,
+        dryRun: false,
+        showSummary: true
+    }
+};
