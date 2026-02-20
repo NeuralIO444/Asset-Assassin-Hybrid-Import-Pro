@@ -1,9 +1,9 @@
-# Asset Assassin: Hybrid Import Pro v3.0 - Documentation
+# Asset Assassin: Hybrid Import Pro v2.0 - Documentation
 
 ## Overview
 **Asset Assassin: Hybrid Import Pro** is an Adobe After Effects script designed to organize imported assets into a clean, standardized project structure.
 
-Version 3.0 introduces a **non-destructive Dry Run** engine powered by a new Manifest architecture, allowing users to visualize changes via a retro-style Terminal Dashboard before any files are moved.
+Version 2.0 introduces a **non-destructive Dry Run** engine powered by a new Manifest architecture, allowing users to visualize changes via a retro-style Terminal Dashboard before any files are moved.
 
 ## Key Features
 
